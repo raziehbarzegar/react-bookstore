@@ -1,7 +1,7 @@
 import Container from "../container/Container";
 import logo from "../../assets/website/logo.png";
 import { FaCartShopping } from "react-icons/fa6";
-import DarkMode from "../darkMode/DarkMode";
+import DarkMode from "./DarkMode";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { Link, NavLink } from "react-router-dom";
 import type { ILink } from "../navbar/navbar.types";
