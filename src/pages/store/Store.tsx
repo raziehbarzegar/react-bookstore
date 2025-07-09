@@ -1,9 +1,9 @@
 import Container from "../../components/container/Container";
 import Book from "../../components/book/Book";
-import useBooks from "../../hooks/useBooks";
+import useBooksContext from "../../hooks/context/useBooksContext";
 
 function Store() {
-  const { books } = useBooks();
+  const { books } = useBooksContext();
   return (
     <section className="dark:bg-gray-900">
       <Container>

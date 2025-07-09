@@ -1,12 +1,13 @@
 import backgroundImage from "../../assets/website/blue-pattern.png";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Container from "../container/Container";
 import type { IBook } from "../../types/server";
 import type { BackgroundStyle } from "../../types/styles";
-import useBooks from "../../hooks/useBooks";
+import  useBooksContext  from "../../hooks/context/useBooksContext";
 
 function Hero() {
-  const { books } = useBooks();
+  const { books } = useBooksContext();
+
   const [selectedBook, setSelectedBook] = useState<IBook | null>(null);
   const latestBooks = books.slice(-3).reverse();
 

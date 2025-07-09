@@ -2,10 +2,10 @@ import Container from "../container/Container";
 import Book from "../book/Book";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
-import useBooks from "../../hooks/useBooks";
+import  useBooksContext  from "../../hooks/context/useBooksContext";
 
 function NewBooks() {
-  const { books } = useBooks();
+  const { books } = useBooksContext();
   const newBooks = books.slice(-3).reverse();
 
   return (
