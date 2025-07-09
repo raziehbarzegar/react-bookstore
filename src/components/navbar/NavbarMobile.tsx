@@ -1,5 +1,5 @@
 import Container from "../container/Container";
-import type { ILink } from "./navbar.types";
+import type { ILink } from "../../types/navbar";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 

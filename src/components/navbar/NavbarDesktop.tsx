@@ -4,7 +4,7 @@ import { FaCartShopping } from "react-icons/fa6";
 import DarkMode from "./DarkMode";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { Link, NavLink } from "react-router-dom";
-import type { ILink } from "../navbar/navbar.types";
+import type { ILink } from "../../types/navbar";
 import NavbarToggle from "./NavbarToggle";
 import { useState } from "react";
 
@@ -14,6 +14,7 @@ interface NavbarDesktop {
   isMenuOpen: boolean;
   handleClick: () => void;
 }
+
 function NavbarDesktop({
   navItems,
   quickLinks,
@@ -69,7 +70,12 @@ function NavbarDesktop({
                           key={item.id}
                           className="px-2 py-1 text-sm rounded duration-200 hover:bg-secondary dark:hover:bg-[rgba(81,147,209,0.4)]"
                         >
-                          <Link to={item.to}>{item.label}</Link>
+                          <Link
+                            to={item.to}
+                            onClick={() => setIsDropdownOpen(false)}
+                          >
+                            {item.label}
+                          </Link>
                         </li>
                       ))}
                     </ul>

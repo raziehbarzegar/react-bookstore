@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import darkModeBtn from "../../assets/website/dark-mode-button.png";
 import lightModeBtn from "../../assets/website/light-mode-button.png";
-import type { Theme } from "./navbar.types";
+import type { Theme } from "../../types/navbar";
 
 function DarkMode() {
   const [theme, setTheme] = useState<Theme>(

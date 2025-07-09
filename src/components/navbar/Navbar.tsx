@@ -1,10 +1,11 @@
 import { useState } from "react";
 import NavbarDesktop from "./NavbarDesktop";
 import NavbarMobile from "./NavbarMobile";
+import type { ILink } from "../../types/navbar";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const navItems = [
+  const navItems: ILink[] = [
     {
       id: 1,
       label: "Home",
@@ -16,12 +17,13 @@ function Navbar() {
       to: "/store",
     },
   ];
-  const quickLinks = [
+  const quickLinks: ILink[] = [
     { id: 3, label: "About us", to: "/about-us" },
     { id: 4, label: "Contact us", to: "/contact-us" },
   ];
 
-  const mobileLinks = [...navItems, ...quickLinks];
+  const mobileLinks: ILink[] = [...navItems, ...quickLinks];
+  
   const toggleMenu = () => {
     setIsMenuOpen((prevState) => !prevState);
   };
