@@ -33,7 +33,7 @@ function NewBooks() {
               key={book.id}
               bookImg={book.imageUrl}
               bookTitle={book.title}
-              bookDescription={book.description}
+              bookAuthor={book.author}
             />
           ))}
         </div>

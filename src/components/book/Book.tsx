@@ -3,11 +3,11 @@ import { FaStar } from "react-icons/fa6";
 interface Book {
   bookImg: string;
   bookTitle: string;
-  bookDescription: string;
+  bookAuthor: string;
 }
-function Book({ bookImg, bookTitle, bookDescription }: Book) {
+function Book({ bookImg, bookTitle, bookAuthor }: Book) {
   return (
-    <div className="shadow relative max-w-64 text-center rounded-md px-4 pb-4 group transition-colors duration-200  hover:!bg-primary hover:text-white dark:bg-gray-800">
+    <div className="shadow w-[300px] relative max-w-64 text-center rounded-md px-4 pb-4 group transition-colors duration-200  hover:!bg-primary hover:text-white dark:bg-gray-800">
       <img
         src={bookImg}
         alt="book"
@@ -21,10 +21,12 @@ function Book({ bookImg, bookTitle, bookDescription }: Book) {
           <FaStar />
           <FaStar />
         </div>
-        <h3 className="font-semibold pt-2 line-clamp-1">{bookTitle}</h3>
-        <p className="line-clamp-2 text-gray-400 group-hover:text-white text-sm text-justify">
-          {bookDescription}
-        </p>
+        <div className="">
+          <h3 className="font-semibold pt-2 line-clamp-1">{bookTitle}</h3>
+          <span className="text-gray-700 text-sm dark:text-gray-200 group-hover:text-white">
+            {bookAuthor}
+          </span>
+        </div>
         <button className="bg-primary text-white group-hover:bg-white group-hover:text-primary mt-3 px-3 py-1 rounded-full cursor-pointer">
           Order Now
         </button>
