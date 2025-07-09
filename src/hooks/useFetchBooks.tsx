@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { IBook } from "../types/server";
 import { getAllBooks } from "../services/api";
 
-function useBooks() {
+function useFetchBooks() {
   const [books, setBooks] = useState<IBook[]>([]);
   useEffect(() => {
     getAllBooks()
@@ -14,4 +14,4 @@ function useBooks() {
 
   return { books };
 }
-export default useBooks;
+export default useFetchBooks;

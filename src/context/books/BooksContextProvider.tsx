@@ -1,11 +1,11 @@
-import useBooks from "../../hooks/useBooks";
+import useFetchBooks from "../../hooks/useFetchBooks";
 import { BooksContext } from "./BooksContext";
 
 interface BooksContextProvider {
   children: React.ReactNode;
 }
 function BooksContextProvider({ children }: BooksContextProvider) {
-  const { books } = useBooks();
+  const { books } = useFetchBooks();
 
   return (
     <BooksContext.Provider
