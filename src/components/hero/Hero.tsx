@@ -1,13 +1,18 @@
 import backgroundImage from "../../assets/website/blue-pattern.png";
 import { useEffect, useState } from "react";
 import Container from "../container/Container";
-import { getAllBooks } from "../../services/api";
 import type { IBook } from "../../types/server";
 import type { BackgroundStyle } from "../../types/styles";
+import useBooks from "../../hooks/useBooks";
 
 function Hero() {
-  const [latestBooks, setLatestBooks] = useState<IBook[]>([]);
+  const { books } = useBooks();
   const [selectedBook, setSelectedBook] = useState<IBook | null>(null);
+  const latestBooks = books.slice(-3).reverse();
+
+  useEffect(() => {
+    setSelectedBook(books[books.length - 1]);
+  }, [books]);
 
   const backgroundStyle: BackgroundStyle = {
     backgroundImage: `url(${backgroundImage})`,
@@ -15,17 +20,6 @@ function Hero() {
     backgroundSize: "cover",
     backgroundPosition: "center",
   };
-
-  useEffect(() => {
-    getAllBooks()
-      .then((data) => {
-        if (data.length > 0) {
-          setLatestBooks(data.slice(-3).reverse());
-          setSelectedBook(data[data.length - 1]);
-        }
-      })
-      .catch((error) => console.log(error.message));
-  }, []);
   return (
     <>
       {selectedBook && (

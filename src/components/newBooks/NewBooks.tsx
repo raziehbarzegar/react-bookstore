@@ -1,21 +1,12 @@
 import Container from "../container/Container";
 import Book from "../book/Book";
-import { useEffect, useState } from "react";
-import type { IBook } from "../../types/server";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { getAllBooks } from "../../services/api";
+import useBooks from "../../hooks/useBooks";
 
 function NewBooks() {
-  const [newBooks, setNewBooks] = useState<IBook[]>([]);
-
-  useEffect(() => {
-    getAllBooks()
-      .then((data) => {
-        setNewBooks(data.slice(-3).reverse());
-      })
-      .catch((error) => console.log(error.message));
-  }, []);
+  const { books } = useBooks();
+  const newBooks = books.slice(-3).reverse();
 
   return (
     <section className="dark:bg-gray-900 py-10">

@@ -1,18 +1,9 @@
-import { useEffect, useState } from "react";
 import Container from "../../components/container/Container";
-import type { IBook } from "../../types/server";
-import { getAllBooks } from "../../services/api";
 import Book from "../../components/book/Book";
+import useBooks from "../../hooks/useBooks";
 
 function Store() {
-  const [books, setBooks] = useState<IBook[]>([]);
-  useEffect(() => {
-    getAllBooks()
-      .then((data) => {
-        setBooks(data);
-      })
-      .catch((error) => console.log(error.message));
-  }, []);
+  const { books } = useBooks();
   return (
     <section className="dark:bg-gray-900">
       <Container>
