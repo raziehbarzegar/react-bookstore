@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import type { IBook } from "../../types/server";
 import { getBookById } from "../../services/api";
+import CartItem from "../../components/cartItem/CartItem";
 
 function Product() {
   const [book, setBook] = useState<IBook | null>(null);
@@ -51,13 +52,7 @@ function Product() {
             Description
           </h3>
           <p className="text-justify leading-relaxed">
-            {book?.description} Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Optio labore pariatur, odit, commodi minus
-            inventore explicabo nesciunt impedit, ratione modi similique
-            veritatis repudiandae fugit doloremque aperiam ducimus officia quae
-            dolorem numquam itaque sit. Ipsam dolorum vitae praesentium ipsum
-            aut mollitia repellat hic quo autem nobis, laborum tenetur, totam,
-            commodi perferendis.
+            {book?.description} 
           </p>
         </div>
       </Container>
