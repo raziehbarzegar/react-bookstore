@@ -47,7 +47,7 @@ function ShoppingCartProvider({ children }: ShoppingCartProvider) {
   };
 
   let cartQty = useMemo(() => {
-    cartItems.reduce((totalQty, item) => totalQty + item.qty, 0);
+    return cartItems.reduce((totalQty, item) => totalQty + item.qty, 0);
   }, [cartItems]);
 
   return (
