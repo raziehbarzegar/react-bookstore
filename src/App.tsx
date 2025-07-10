@@ -3,6 +3,7 @@ import Home from "./pages/home/Home";
 import Layout from "./components/layout/Layout";
 import Store from "./pages/store/Store";
 import BooksContextProvider from "./context/books/BooksContextProvider";
+import BookPage from "./pages/bookPage/Product";
 
 export function App() {
   return (
@@ -12,6 +13,7 @@ export function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/store" element={<Store />} />
+            <Route path="/books/:id" element={<BookPage />} />
           </Routes>
         </Layout>
       </div>
