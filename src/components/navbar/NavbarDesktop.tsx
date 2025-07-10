@@ -7,6 +7,7 @@ import { Link, NavLink } from "react-router-dom";
 import type { ILink } from "../../types/navbar";
 import NavbarToggle from "./NavbarToggle";
 import { useState } from "react";
+import { useShoppingCartContext } from "../../hooks/context/useShoppingCartContext";
 
 interface NavbarDesktop {
   navItems: ILink[];
@@ -26,6 +27,7 @@ function NavbarDesktop({
   const handleDropdownClick = () => {
     setIsDropdownOpen((prevState) => !prevState);
   };
+  const { cartQty } = useShoppingCartContext();
 
   return (
     <>
@@ -85,12 +87,14 @@ function NavbarDesktop({
             </div>
             <div className="flex items-center gap-x-3">
               <DarkMode />
-              <div className="relative">
+              <Link to="/cart" className="relative">
                 <FaCartShopping className="text-2xl" />
-                <span className="bg-primary text-white w-4 h-4 text-center font-bold text-xs inline-block absolute rounded-full -top-2 -right-2">
-                  2
-                </span>
-              </div>
+                {cartQty !=0 ? (
+                  <span className="bg-primary text-white w-[18px] h-[18px] text-center p-[1px] font-bold text-xs inline-block absolute rounded-full -top-2 -right-2">
+                    {cartQty}
+                  </span>
+                ): <></>}
+              </Link>
               <NavbarToggle handleClick={handleClick} isMenuOpen={isMenuOpen} />
             </div>
           </div>
