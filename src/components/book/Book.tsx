@@ -1,13 +1,18 @@
 import { FaStar } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 interface Book {
+  bookId: string;
   bookImg: string;
   bookTitle: string;
   bookAuthor: string;
 }
-function Book({ bookImg, bookTitle, bookAuthor }: Book) {
+function Book({ bookId, bookImg, bookTitle, bookAuthor }: Book) {
   return (
-    <div className="shadow w-[300px] relative max-w-64 text-center rounded-md px-4 pb-4 group transition-colors duration-200  hover:!bg-primary hover:text-white dark:bg-gray-800">
+    <Link
+      to={`/books/${bookId}`}
+      className="shadow w-[300px] relative max-w-64 text-center rounded-md px-4 pb-4 group transition-colors duration-200  hover:!bg-primary hover:text-white dark:bg-gray-800"
+    >
       <img
         src={bookImg}
         alt="book"
@@ -31,7 +36,7 @@ function Book({ bookImg, bookTitle, bookAuthor }: Book) {
           Order Now
         </button>
       </div>
-    </div>
+    </Link>
   );
 }
 

@@ -3,6 +3,7 @@ export interface IBook {
   imageUrl: string;
   title: string;
   author: string;
+  pages:number
   priceCents: number;
   description: string;
 }

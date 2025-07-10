@@ -15,6 +15,7 @@ function Store() {
             {books.map((book) => (
               <Book
                 key={book.id}
+                bookId={book.id}
                 bookImg={book.imageUrl}
                 bookAuthor={book.author}
                 bookTitle={book.title}

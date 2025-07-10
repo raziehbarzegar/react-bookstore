@@ -2,7 +2,7 @@ import Container from "../container/Container";
 import Book from "../book/Book";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
-import  useBooksContext  from "../../hooks/context/useBooksContext";
+import useBooksContext from "../../hooks/context/useBooksContext";
 
 function NewBooks() {
   const { books } = useBooksContext();
@@ -22,6 +22,7 @@ function NewBooks() {
           {newBooks.map((book) => (
             <Book
               key={book.id}
+              bookId={book.id}
               bookImg={book.imageUrl}
               bookTitle={book.title}
               bookAuthor={book.author}
