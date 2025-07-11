@@ -5,7 +5,7 @@ import useBooksContext from "../../hooks/context/useBooksContext";
 function Store() {
   const { books } = useBooksContext();
   return (
-    <section className="dark:bg-gray-900">
+    <section className="pt-32 dark:bg-gray-900">
       <Container>
         <h2 className="text-4xl font-bold text-center text-primary py-12 tracking-wide">
           Explore Our Books

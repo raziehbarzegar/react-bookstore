@@ -22,7 +22,7 @@ function Product() {
   }, [productId]);
 
   return (
-    <div className="dark:bg-gray-800 py-20">
+    <div className="pt-36 dark:bg-gray-800 py-20">
       <Container>
         <div className="flex flex-col lg:flex-row gap-12 items-center justify-center">
           <div>

@@ -1,9 +1,9 @@
 import backgroundImage from "../../assets/website/blue-pattern.png";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Container from "../container/Container";
 import type { IBook } from "../../types/server";
 import type { BackgroundStyle } from "../../types/styles";
-import  useBooksContext  from "../../hooks/context/useBooksContext";
+import useBooksContext from "../../hooks/context/useBooksContext";
 
 function Hero() {
   const { books } = useBooksContext();
@@ -24,7 +24,7 @@ function Hero() {
   return (
     <>
       {selectedBook && (
-        <div className=" bg-gray-100 dark:bg-gray-800" style={backgroundStyle}>
+        <div className="pt-24 bg-gray-100 dark:bg-gray-800" style={backgroundStyle}>
           <Container className="relative flex flex-col md:flex-row items-center h-[800px] md:h-[700px] ">
             <div className="flex justify-center p-16 md:order-1 md:basis-1/2">
               <div className="max-w-96">

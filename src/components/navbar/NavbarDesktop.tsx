@@ -31,7 +31,7 @@ function NavbarDesktop({
 
   return (
     <>
-      <nav className="py-4 bg-white dark:bg-gray-900 shadow-sm">
+      <nav className="fixed top-0 right-0 z-50 w-full py-4 bg-white dark:bg-gray-900 shadow-md">
         <Container>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-x-3">
