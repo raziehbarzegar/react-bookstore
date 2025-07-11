@@ -18,13 +18,13 @@ function NavbarMobile({
     setIsMenuOpen(false);
   };
   return (
-    <nav>
+    <nav className="fixed z-[100] w-full top-20">
       <div
         className={`md:hidden py-3 absolute duration-200 z-50 dark:bg-gray-900 bg-white w-full
             ${
               isMenuOpen
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 -translate-y-5"
+                ? "opacity-100 translate-y-0 pointer-events-auto"
+                : "opacity-0 -translate-y-5 pointer-events-none"
             }`}
       >
         <Container>
