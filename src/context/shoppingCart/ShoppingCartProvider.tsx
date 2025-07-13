@@ -1,6 +1,8 @@
 import React, { useMemo } from "react";
 import { ShoppingCartContext, type CartItem } from "./ShoppingCartContext";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import useFetchBooks from "../../hooks/useFetchBooks";
+import type { IBook } from "../../types/server";
 
 interface ShoppingCartProvider {
   children: React.ReactNode;
@@ -12,7 +14,7 @@ function ShoppingCartProvider({ children }: ShoppingCartProvider) {
     []
   );
 
-  const handleIncreaseProductQty = (id: number) => {
+  const handleIncreaseProductQty = (id: string) => {
     setCartItems((currentItems) => {
       let selectedItem = currentItems.find((item) => item.productId == id);
       if (selectedItem == null) {
@@ -24,7 +26,7 @@ function ShoppingCartProvider({ children }: ShoppingCartProvider) {
       }
     });
   };
-  const handleDecreaseProductQty = (id: number) => {
+  const handleDecreaseProductQty = (id: string) => {
     setCartItems((currentItems) => {
       let selectedItem = currentItems.find((item) => item.productId == id);
 
@@ -37,13 +39,30 @@ function ShoppingCartProvider({ children }: ShoppingCartProvider) {
       }
     });
   };
-  const getProductQty = (id: number) => {
+  const getProductQty = (id: string) => {
     return cartItems.find((item) => item.productId == id)?.qty || 0;
   };
-  const handleRemoveProduct = (id: number) => {
+  const handleRemoveProduct = (id: string) => {
     setCartItems((currentItems) => {
       return currentItems.filter((item) => item.productId != id);
     });
+  };
+  
+  const { books } = useFetchBooks();
+  
+  const getTotalPriceInCents = () => {
+
+    let totalPriceCents = 0;
+
+    cartItems.forEach((cartItem) => {
+      const book = books.find(
+        (b) => String(b.id) === String(cartItem.productId)
+      );
+      if (book) {
+        totalPriceCents += book.priceCents;
+      }
+    });
+    return totalPriceCents;
   };
 
   let cartQty = useMemo(() => {
@@ -60,6 +79,7 @@ function ShoppingCartProvider({ children }: ShoppingCartProvider) {
         getProductQty,
         handleRemoveProduct,
         cartQty,
+        getTotalPriceInCents,
       }}
     >
       {children}
