@@ -47,19 +47,18 @@ function ShoppingCartProvider({ children }: ShoppingCartProvider) {
       return currentItems.filter((item) => item.productId != id);
     });
   };
-  
+
   const { books } = useFetchBooks();
   
   const getTotalPriceInCents = () => {
-
     let totalPriceCents = 0;
-
+    
     cartItems.forEach((cartItem) => {
       const book = books.find(
         (b) => String(b.id) === String(cartItem.productId)
       );
       if (book) {
-        totalPriceCents += book.priceCents;
+        totalPriceCents += (book.priceCents * cartItem.qty);
       }
     });
     return totalPriceCents;

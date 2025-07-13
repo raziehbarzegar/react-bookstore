@@ -16,7 +16,7 @@ function Cart() {
               Total items: <strong>{cartQty}</strong>
             </p>
             <p className="mb-4 text-gray-700 dark:text-gray-300">
-              Total price: <strong>{`$${getTotalPriceInCents() / 100}`}</strong>
+              Total price: <strong>{`$${(getTotalPriceInCents() / 100).toFixed(2)}`}</strong>
             </p>
             <button className="text-sm lg:text-md bg-primary text-white px-4 py-2 w-full rounded hover:bg-primary/90">
               Proceed to Checkout
