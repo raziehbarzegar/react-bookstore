@@ -8,7 +8,7 @@ export async function getAllBooks() {
   const { data } = await client("/books");
   return data;
 }
-export async function getBookById(id: number) {
+export async function getBookById(id: string) {
   const { data } = await client(`/books/${id}`);
   return data;
 }

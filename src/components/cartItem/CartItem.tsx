@@ -5,7 +5,7 @@ import { useShoppingCartContext } from "../../hooks/context/useShoppingCartConte
 import { Link } from "react-router-dom";
 
 interface ICartItem {
-  productId: number;
+  productId: string;
   qty: number;
 }
 

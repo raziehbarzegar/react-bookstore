@@ -2,14 +2,15 @@ import { createContext } from "react";
 interface ShoppingCartContext {
   cartItems: CartItem[];
   setCartItems: React.Dispatch<React.SetStateAction<CartItem[]>>;
-  handleIncreaseProductQty: (id: number) => void;
-  handleDecreaseProductQty: (id: number) => void;
-  getProductQty: (id: number) => number;
-  handleRemoveProduct: (id: number) => void;
+  handleIncreaseProductQty: (id: string) => void;
+  handleDecreaseProductQty: (id: string) => void;
+  getProductQty: (id: string) => number;
+  handleRemoveProduct: (id: string) => void;
   cartQty: number;
+  getTotalPriceInCents:()=>number
 }
 export interface CartItem {
-  productId: number;
+  productId: string;
   qty: number;
 }
 
