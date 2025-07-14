@@ -8,7 +8,7 @@ function Layout({ children }: Layout) {
   return (
     <>
       <Navbar />
-      <main>{children}</main>
+      <main className="min-h-screen">{children}</main>
       <Footer />
     </>
   );
