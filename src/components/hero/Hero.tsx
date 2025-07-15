@@ -5,6 +5,7 @@ import type { BackgroundStyle } from "../../types/styles";
 import useBooksContext from "../../hooks/context/useBooksContext";
 import type { IBook } from "../../types/server";
 import { Link } from "react-router";
+import Button from "../button/Button";
 
 function Hero() {
   const { books } = useBooksContext();
@@ -87,14 +88,9 @@ function Hero() {
               {currentBook.description}
             </p>
           </div>
-          <div className="py-3">
-            <Link
-              to={`/books/${currentBook.id}`}
-              className="bg-primary text-white mt-5 px-3 py-2 rounded-full cursor-pointer"
-            >
-              Order Now
-            </Link>
-          </div>
+          <Button variant="primary" className="py-2 px-4 mt-5 hover:!bg-primary/80">
+            <Link to={`/books/${currentBook.id}`}>Order Now</Link>
+          </Button>
         </div>
       </Container>
     </section>

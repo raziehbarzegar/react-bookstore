@@ -3,6 +3,7 @@ import type { IBook } from "../../types/server";
 import { getBookById } from "../../services/api";
 import { useShoppingCartContext } from "../../hooks/context/useShoppingCartContext";
 import { Link } from "react-router-dom";
+import Button from "../button/Button";
 
 interface ICartItem {
   productId: string;
@@ -43,29 +44,33 @@ function CartItem({ productId, qty }: ICartItem) {
           </h3>
 
           <div className="flex items-center gap-2">
-            <button
+            <Button
+              variant="primary"
               onClick={() => handleIncreaseProductQty(productId)}
-              className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-full text-sm"
+              className="flex justify-center w-8 h-8 hover:!bg-primary/80 px-3 py-1 text-md font-bold"
             >
               +
-            </button>
-            <span className="text-lg font-medium text-gray-700 dark:text-gray-200">
+            </Button>
+            <span className="text-xl font-medium text-gray-700 dark:text-gray-200">
               {qty}
             </span>
-            <button
+
+            <Button
+              variant="primary"
               onClick={() => handleDecreaseProductQty(productId)}
-              className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-full text-sm"
+              className="flex justify-center w-8 h-8 hover:!bg-primary/80 px-3 py-1 text-md font-bold"
             >
               -
-            </button>
+            </Button>
           </div>
 
-          <button
+          <Button
+            className="w-fit hover:!bg-red-600/80 px-4 py-1 text-md mt-2"
+            variant="danger"
             onClick={() => handleRemoveProduct(productId)}
-            className="w-fit bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-full text-sm mt-2"
           >
             Remove
-          </button>
+          </Button>
         </div>
       </Link>
     </div>

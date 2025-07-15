@@ -3,6 +3,7 @@ import Book from "../book/Book";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
 import useBooksContext from "../../hooks/context/useBooksContext";
+import Button from "../button/Button";
 
 function NewBooks() {
   const { books } = useBooksContext();
@@ -30,13 +31,15 @@ function NewBooks() {
           ))}
         </div>
         <div className="flex justify-center mt-7">
-          <Link
-            to="/store"
-            className="flex gap-1 items-center group bg-primary text-white hover:bg-white hover:text-primary transition-all duration-300 px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-primary"
+          <Button
+            variant="primary"
+            className="hover:!bg-white hover:!text-primary group duration-300 px-4 py-2"
           >
-            <span className="font-medium">Explore All Books</span>
-            <IoIosArrowForward className="transition-transform duration-200 group-hover:translate-x-1" />
-          </Link>
+            <Link to="/store" className="flex gap-1 items-center">
+              <span className="font-medium">Explore All Books</span>
+              <IoIosArrowForward className="transition-transform duration-200 group-hover:translate-x-1" />
+            </Link>
+          </Button>
         </div>
       </Container>
     </section>

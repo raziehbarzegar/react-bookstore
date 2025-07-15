@@ -1,5 +1,6 @@
 import { FaStar } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import Button from "../button/Button";
 
 interface Book {
   bookId: string;
@@ -32,9 +33,14 @@ function Book({ bookId, bookImg, bookTitle, bookAuthor }: Book) {
             {bookAuthor}
           </span>
         </div>
-        <button className="bg-primary text-white group-hover:bg-white group-hover:text-primary mt-3 px-3 py-1 rounded-full cursor-pointer">
-          Order Now
-        </button>
+
+        <Button
+          variant="primary"
+          className="group-hover:!bg-white group-hover:!text-primary mt-3 px-3 py-1"
+        >
+          <Link to={`/books/${bookId}`}>Order Now</Link>
+        </Button>
+      
       </div>
     </Link>
   );
