@@ -12,14 +12,14 @@ export function App() {
     <BooksContextProvider>
       <ShoppingCartProvider>
         <div className="dark:text-white">
-          <Layout>
-            <Routes>
+          <Routes>
+            <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
               <Route path="/store" element={<Store />} />
               <Route path="/books/:id" element={<Product />} />
               <Route path="/cart" element={<Cart />} />
-            </Routes>
-          </Layout>
+            </Route>
+          </Routes>
         </div>
       </ShoppingCartProvider>
     </BooksContextProvider>

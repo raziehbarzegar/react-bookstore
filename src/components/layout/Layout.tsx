@@ -1,14 +1,14 @@
-import React from "react";
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
-interface Layout {
-  children: React.ReactNode;
-}
-function Layout({ children }: Layout) {
+import { Outlet } from "react-router-dom";
+
+function Layout() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen">{children}</main>
+      <main className="min-h-screen">
+        <Outlet />
+      </main>
       <Footer />
     </>
   );
