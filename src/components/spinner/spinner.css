@@ -1,0 +1,17 @@
+.loader {
+  border: 6px solid #b9d4ed;
+  border-radius: 50%;
+  border-top-color: #1182c5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: spinner 2s infinite linear;
+}
+@keyframes spinner {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
