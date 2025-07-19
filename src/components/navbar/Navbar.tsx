@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ILink } from "../../types/navbar";
-import { Link, NavLink, useLocation } from "react-router";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import Container from "../container/Container";
 import logo from "../../assets/website/logo.png";
 import { IoIosArrowForward, IoMdArrowDropdown } from "react-icons/io";
@@ -10,16 +10,8 @@ import { IoCloseSharp, IoMenu } from "react-icons/io5";
 import { useShoppingCart } from "../../context/shoppingCart/ShoppingCartProvider";
 
 const navItems: ILink[] = [
-  {
-    id: 1,
-    label: "Home",
-    to: "/",
-  },
-  {
-    id: 2,
-    label: "Store",
-    to: "/store",
-  },
+  { id: 1, label: "Home", to: "/" },
+  { id: 2, label: "Store", to: "/store" },
 ];
 const quickLinks: ILink[] = [
   { id: 3, label: "About us", to: "/about-us" },
@@ -28,31 +20,22 @@ const quickLinks: ILink[] = [
 const mobileLinks: ILink[] = [...navItems, ...quickLinks];
 
 function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
-  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { cartQty } = useShoppingCart();
   const observerRef = useRef<IntersectionObserver | null>(null);
-  const location = useLocation(); 
+  const location = useLocation();
 
-  const handleMenuClick = () => {
-    setIsMenuOpen((prevState) => !prevState);
-  };
-  const handleDropdownClick = () => {
-    setIsDropdownOpen((prevState) => !prevState);
-  };
+  const handleMenuClick = () => setIsMenuOpen((prev) => !prev);
+  const handleDropdownClick = () => setIsDropdownOpen((prev) => !prev);
 
-  const handleIntersection = useCallback(
-    ([entry]: IntersectionObserverEntry[]) => {
-      setIsScrolled(!entry.isIntersecting);
-    },
-    []
-  );
+  const handleIntersection = useCallback(([entry]: IntersectionObserverEntry[]) => {
+    setIsScrolled(!entry.isIntersecting);
+  }, []);
 
   const setupObserver = useCallback(() => {
-    if (observerRef.current) {
-      observerRef.current.disconnect();
-    }
+    if (observerRef.current) observerRef.current.disconnect();
 
     observerRef.current = new IntersectionObserver(handleIntersection, {
       root: null,
@@ -60,21 +43,21 @@ function Navbar() {
       threshold: 0.0,
     });
 
-    const heroElement = document.querySelector(".hero-section");
-
-    if (heroElement) {
-      observerRef.current.observe(heroElement);
-    }
-
-    return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
+    const tryObserve = () => {
+      const heroElement = document.querySelector(".hero-section");
+      if (heroElement) {
+        observerRef.current?.observe(heroElement);
+      } else {
+        setTimeout(tryObserve, 100);
       }
     };
+
+    tryObserve();
+
+    return () => observerRef.current?.disconnect();
   }, [handleIntersection]);
 
   useEffect(() => {
-    if(location.pathname !== '/') return
     const cleanup = setupObserver();
     return cleanup;
   }, [setupObserver, location.pathname]);
@@ -120,7 +103,6 @@ function Navbar() {
                       }`}
                     />
                   </div>
-
                   {isDropdownOpen && (
                     <ul className="absolute bg-white dark:bg-gray-900 shadow mt-2 p-3 w-28 z-50">
                       {quickLinks.map((item) => (
@@ -138,16 +120,15 @@ function Navbar() {
                 </li>
               </ul>
             </div>
+
             <div className="flex items-center gap-x-3">
               <DarkMode />
               <Link to="/cart" className="relative">
                 <FaCartShopping className="text-2xl" />
-                {cartQty != 0 ? (
+                {cartQty !== 0 && (
                   <span className="bg-primary text-white w-[18px] h-[18px] text-center p-[1px] font-bold text-xs inline-block absolute rounded-full -top-2 -right-2">
                     {cartQty}
                   </span>
-                ) : (
-                  <></>
                 )}
               </Link>
               {isMenuOpen ? (
@@ -165,14 +146,14 @@ function Navbar() {
           </div>
         </Container>
       </nav>
+
       <nav className="md:hidden top-20">
         <div
-          className={`duration-200
-            ${
-              isMenuOpen
-                ? "h-full py-3  opacity-100 translate-y-0 pointer-events-auto"
-                : "h-0 opacity-0 -translate-y-5 pointer-events-none"
-            }`}
+          className={`duration-200 ${
+            isMenuOpen
+              ? "h-full py-3 opacity-100 translate-y-0 pointer-events-auto"
+              : "h-0 opacity-0 -translate-y-5 pointer-events-none"
+          }`}
         >
           <Container>
             <div className="flex flex-col justify-between">
@@ -183,7 +164,7 @@ function Navbar() {
                   onClick={handleMenuClick}
                   className="flex justify-between gap-x-1 items-center font-medium px-2 py-1 rounded duration-200 hover:bg-secondary dark:hover:bg-[rgba(81,147,209,0.4)]"
                 >
-                  <p>{item.label} </p>
+                  <p>{item.label}</p>
                   <IoIosArrowForward />
                 </Link>
               ))}
