@@ -2,13 +2,13 @@ import backgroundImage from "../../assets/website/blue-pattern.png";
 import { useCallback, useEffect, useState } from "react";
 import Container from "../container/Container";
 import type { BackgroundStyle } from "../../types/styles";
-import useBooksContext from "../../hooks/context/useBooksContext";
 import type { IBook } from "../../types/server";
 import { Link } from "react-router";
 import Button from "../button/Button";
+import { useBooks } from "../../context/books/BooksProvider";
 
 function Hero() {
-  const { books } = useBooksContext();
+  const { books } = useBooks();
 
   if (books.length === 0) return;
   const latestBooks = books.slice(-3).reverse();
@@ -24,7 +24,7 @@ function Hero() {
     if (isPaused) return;
     const interval = setInterval(() => {
       nextImage();
-    }, 4000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [isPaused, nextImage]);
@@ -38,7 +38,7 @@ function Hero() {
 
   return (
     <section
-      className="pt-24 bg-gray-100 dark:bg-gray-800  pb-10"
+      className="hero-section pt-24 bg-gray-100 dark:bg-gray-800  pb-10"
       style={backgroundStyle}
       onMouseEnter={() => setIspaused(true)}
       onMouseLeave={() => setIspaused(false)}
@@ -52,13 +52,13 @@ function Hero() {
               className="h-[320px] lg:w-[300px] lg:h-[450px] object-cover shadow-sm rou"
             />
           </div>
-          <div className="flex lg:flex-col gap-6 absolute top-[50%] md:top-[75%] lg:right-[5%] lg:top-[26%]">
+          <div className="flex lg:flex-col gap-6 absolute top-[50%] md:top-[80%] lg:right-[5%] lg:top-[26%]">
             {latestBooks.map((book, index) => (
               <div
                 key={book.id}
                 className={`${
                   index === currentIndex ? "scale-125" : ""
-                } hover:scale-105 duration-200`}
+                } duration-200`}
                 onClick={() => {
                   if (index !== currentIndex) {
                     setCurrentIndex(index);
@@ -68,7 +68,7 @@ function Hero() {
                 <img
                   src={book.imageUrl}
                   alt={`${book.title}`}
-                  className="max-w-[100px] h-[100px]"
+                  className="w-[70px] h-[100px] object-center"
                 />
               </div>
             ))}
@@ -84,7 +84,7 @@ function Hero() {
             </span>
           </div>
           <div className="w-full text-left px-3">
-            <p className="mt-10 text-justify line-clamp-4">
+            <p className="mt-10 text-justify line-clamp-2">
               {currentBook.description}
             </p>
           </div>

@@ -1,18 +1,37 @@
-import React, { useMemo } from "react";
-import { ShoppingCartContext, type CartItem } from "./ShoppingCartContext";
+import React, { createContext, useContext, useMemo } from "react";
 import useLocalStorage from "../../hooks/useLocalStorage";
-import useFetchBooks from "../../hooks/useFetchBooks";
-import type { IBook } from "../../types/server";
+import { useBooks } from "../books/BooksProvider";
 
 interface ShoppingCartProvider {
   children: React.ReactNode;
 }
+
+interface ShoppingCartContext {
+  cartItems: CartItem[];
+  setCartItems: React.Dispatch<React.SetStateAction<CartItem[]>>;
+  handleIncreaseProductQty: (id: string) => void;
+  handleDecreaseProductQty: (id: string) => void;
+  getProductQty: (id: string) => number;
+  handleRemoveProduct: (id: string) => void;
+  cartQty: number;
+  getTotalPriceInCents: () => number;
+}
+
+export interface CartItem {
+  productId: string;
+  qty: number;
+}
+
+const ShoppingCartContext = createContext<ShoppingCartContext>(
+  {} as ShoppingCartContext
+);
 
 function ShoppingCartProvider({ children }: ShoppingCartProvider) {
   const [cartItems, setCartItems] = useLocalStorage<CartItem[]>(
     "cartItems",
     []
   );
+  const { books } = useBooks();
 
   const handleIncreaseProductQty = (id: string) => {
     setCartItems((currentItems) => {
@@ -48,17 +67,15 @@ function ShoppingCartProvider({ children }: ShoppingCartProvider) {
     });
   };
 
-  const { books } = useFetchBooks();
-  
   const getTotalPriceInCents = () => {
     let totalPriceCents = 0;
-    
+
     cartItems.forEach((cartItem) => {
       const book = books.find(
         (b) => String(b.id) === String(cartItem.productId)
       );
       if (book) {
-        totalPriceCents += (book.priceCents * cartItem.qty);
+        totalPriceCents += book.priceCents * cartItem.qty;
       }
     });
     return totalPriceCents;
@@ -87,3 +104,7 @@ function ShoppingCartProvider({ children }: ShoppingCartProvider) {
 }
 
 export default ShoppingCartProvider;
+
+export function useShoppingCart() {
+  return useContext(ShoppingCartContext);
+}

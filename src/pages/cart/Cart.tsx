@@ -1,10 +1,21 @@
 import Button from "../../components/button/Button";
 import CartItem from "../../components/cartItem/CartItem";
 import Container from "../../components/container/Container";
-import { useShoppingCartContext } from "../../hooks/context/useShoppingCartContext";
+import Spinner from "../../components/spinner/Spinner";
+import { useBooks } from "../../context/books/BooksProvider";
+import { useShoppingCart } from "../../context/shoppingCart/ShoppingCartProvider";
 
 function Cart() {
-  const { cartItems, cartQty, getTotalPriceInCents } = useShoppingCartContext();
+  const { cartItems, cartQty, getTotalPriceInCents } = useShoppingCart();
+  const { isLoading } = useBooks();
+
+  if (isLoading)
+    return (
+      <div className="flex items-center pt-32 justify-center my-10">
+        <Spinner className="w-[100px] h-[100px]" />
+      </div>
+    );
+
   return (
     <div className="dark:bg-gray-800">
       <Container className="py-32 flex flex-col gap-8 md:flex-row items-center md:items-start justify-center max-w-[900px]">
@@ -17,7 +28,7 @@ function Cart() {
               Total items: <strong>{cartQty}</strong>
             </p>
             <p className="mb-4 text-gray-700 dark:text-gray-300">
-              Total price:{" "}
+              Total price:
               <strong>{`$${(getTotalPriceInCents() / 100).toFixed(2)}`}</strong>
             </p>
             <Button

@@ -1,33 +1,29 @@
 import Container from "../../components/container/Container";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import type { IBook } from "../../types/server";
-import { getBookById } from "../../services/api";
-import { useShoppingCartContext } from "../../hooks/context/useShoppingCartContext";
+import { useNavigate, useParams } from "react-router";
 import Button from "../../components/button/Button";
 import Spinner from "../../components/spinner/Spinner";
+import { useEffect } from "react";
+import { useShoppingCart } from "../../context/shoppingCart/ShoppingCartProvider";
+import { useBooks } from "../../context/books/BooksProvider";
 
 function Product() {
-  const [book, setBook] = useState<IBook | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { getBookById, isLoading } = useBooks();
   const productId = useParams<{ id: string }>().id as string;
+  const book = getBookById(productId);
+  const navigate = useNavigate();
+
   const {
     handleIncreaseProductQty,
     getProductQty,
     handleDecreaseProductQty,
     handleRemoveProduct,
-  } = useShoppingCartContext();
+  } = useShoppingCart();
 
   useEffect(() => {
-    setIsLoading(true);
-    getBookById(productId)
-      .then((data) => {
-        setBook(data);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [productId]);
+    if (!isLoading && !book) {
+      navigate("/store");
+    }
+  }, [book, isLoading, navigate]);
 
   return (
     <>
